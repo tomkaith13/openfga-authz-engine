@@ -64,5 +64,5 @@ services:
     networks:
       - openfga
     environment:
-      - TOPAZ_IS_URL=https://topaz:8383/api/v2/authz/is # expose the authorizer as a url for the applicatio code to call
+      - FGA_API_URL=http://openfga:8080
    
