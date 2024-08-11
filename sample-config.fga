@@ -1,0 +1,61 @@
+name: FGA Authz Engine
+description: 'Store ID: 01J50VZKFQSWR4ZDNEMWAZYX2H'
+model: |
+  model
+    schema 1.1
+
+  type user
+
+  type group
+    relations
+      define member: [user]
+
+  type capability
+    relations
+      define can_read: reader or admin
+      define can_write: writer or admin
+      define can_update: updater or admin
+      define can_delete: deleter or admin
+      define can_all: can_read and can_write and can_update and can_delete
+      define reader: [user, group#member]
+      define writer: [user, group#member]
+      define updater: [user, group#member]
+      define deleter: [user, group#member]
+      define admin: [user, group#member]
+tuples:
+  - object: group:claims_reader
+    user: user:bob
+    relation: member
+  - object: group:claims_writer
+    user: user:alice
+    relation: member
+  - object: group:claims_admin
+    user: user:charlie
+    relation: member
+  - user: group:claims_writer#member
+    relation: writer
+    object: capability:claims
+  - user: group:claims_reader#member
+    relation: reader
+    object: capability:claims
+  - user: group:claims_admin#member
+    relation: admin
+    object: capability:claims
+tests:
+  - name: Tests
+    check:
+      - user: user:bob
+        object: capability:claims
+        assertions:
+          can_read: true
+      - user: user:alice
+        object: capability:claims
+        assertions:
+          can_write: true
+          can_read: false
+          can_all: false
+      - user: user:charlie
+        object: capability:claims
+        assertions:
+          can_read: true
+          can_all: true
