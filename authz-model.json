@@ -1,0 +1,213 @@
+{
+  "schema_version": "1.1",
+  "type_definitions": [
+    {
+      "type": "user",
+      "relations": {},
+      "metadata": null
+    },
+    {
+      "type": "group",
+      "relations": {
+        "member": {
+          "this": {}
+        }
+      },
+      "metadata": {
+        "relations": {
+          "member": {
+            "directly_related_user_types": [
+              {
+                "type": "user"
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "type": "capability",
+      "relations": {
+        "can_read": {
+          "union": {
+            "child": [
+              {
+                "computedUserset": {
+                  "relation": "reader"
+                }
+              },
+              {
+                "computedUserset": {
+                  "relation": "admin"
+                }
+              }
+            ]
+          }
+        },
+        "can_write": {
+          "union": {
+            "child": [
+              {
+                "computedUserset": {
+                  "relation": "writer"
+                }
+              },
+              {
+                "computedUserset": {
+                  "relation": "admin"
+                }
+              }
+            ]
+          }
+        },
+        "can_update": {
+          "union": {
+            "child": [
+              {
+                "computedUserset": {
+                  "relation": "updater"
+                }
+              },
+              {
+                "computedUserset": {
+                  "relation": "admin"
+                }
+              }
+            ]
+          }
+        },
+        "can_delete": {
+          "union": {
+            "child": [
+              {
+                "computedUserset": {
+                  "relation": "deleter"
+                }
+              },
+              {
+                "computedUserset": {
+                  "relation": "admin"
+                }
+              }
+            ]
+          }
+        },
+        "can_all": {
+          "intersection": {
+            "child": [
+              {
+                "computedUserset": {
+                  "relation": "can_read"
+                }
+              },
+              {
+                "computedUserset": {
+                  "relation": "can_write"
+                }
+              },
+              {
+                "computedUserset": {
+                  "relation": "can_update"
+                }
+              },
+              {
+                "computedUserset": {
+                  "relation": "can_delete"
+                }
+              }
+            ]
+          }
+        },
+        "reader": {
+          "this": {}
+        },
+        "writer": {
+          "this": {}
+        },
+        "updater": {
+          "this": {}
+        },
+        "deleter": {
+          "this": {}
+        },
+        "admin": {
+          "this": {}
+        }
+      },
+      "metadata": {
+        "relations": {
+          "can_read": {
+            "directly_related_user_types": []
+          },
+          "can_write": {
+            "directly_related_user_types": []
+          },
+          "can_update": {
+            "directly_related_user_types": []
+          },
+          "can_delete": {
+            "directly_related_user_types": []
+          },
+          "can_all": {
+            "directly_related_user_types": []
+          },
+          "reader": {
+            "directly_related_user_types": [
+              {
+                "type": "user"
+              },
+              {
+                "type": "group",
+                "relation": "member"
+              }
+            ]
+          },
+          "writer": {
+            "directly_related_user_types": [
+              {
+                "type": "user"
+              },
+              {
+                "type": "group",
+                "relation": "member"
+              }
+            ]
+          },
+          "updater": {
+            "directly_related_user_types": [
+              {
+                "type": "user"
+              },
+              {
+                "type": "group",
+                "relation": "member"
+              }
+            ]
+          },
+          "deleter": {
+            "directly_related_user_types": [
+              {
+                "type": "user"
+              },
+              {
+                "type": "group",
+                "relation": "member"
+              }
+            ]
+          },
+          "admin": {
+            "directly_related_user_types": [
+              {
+                "type": "user"
+              },
+              {
+                "type": "group",
+                "relation": "member"
+              }
+            ]
+          }
+        }
+      }
+    }
+  ]
+}
