@@ -6,3 +6,5 @@ require (
 	github.com/go-chi/chi v1.5.5
 	github.com/openfga/go-sdk v0.5.0
 )
+
+require golang.org/x/sync v0.7.0 // indirect
