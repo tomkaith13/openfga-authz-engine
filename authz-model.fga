@@ -23,18 +23,23 @@ type capability
 #   - object: group:claims_reader
 #     user: user:bob
 #     relation: member
+
 #   - object: group:claims_writer
 #     user: user:alice
 #     relation: member
+
 #   - object: group:claims_admin
 #     user: user:charlie
 #     relation: member
+
 #   - user: group:claims_writer#member
 #     relation: writer
 #     object: capability:claims
+
 #   - user: group:claims_reader#member
 #     relation: reader
 #     object: capability:claims
+
 #   - user: group:claims_admin#member
 #     relation: admin
 #     object: capability:claims
