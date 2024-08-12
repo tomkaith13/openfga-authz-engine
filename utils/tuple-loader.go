@@ -88,6 +88,16 @@ func TupleLoader(fgaClient *openfgaClient.OpenFgaClient, modelId string) error {
 				Relation: "admin",
 				Object:   "capability:claims",
 			},
+			{ // squanchy is in claims admin
+				User:     "user:squanchy",
+				Relation: "member",
+				Object:   "group:journey_admin",
+			},
+			{
+				User:     "group:journey_admin#member",
+				Relation: "admin",
+				Object:   "capability:journey",
+			},
 		},
 	}
 	data, err := fgaClient.Write(context.Background()).
@@ -116,8 +126,50 @@ func LoadAssertions(fgaClient *openfgaClient.OpenFgaClient, modelId string) erro
 		},
 		openfgaClient.ClientAssertion{
 			User:        "user:birdman",
+			Relation:    "can_all",
+			Object:      "capability:claims",
+			Expectation: true,
+		},
+		openfgaClient.ClientAssertion{
+			User:        "user:birdman",
 			Relation:    "can_delete",
 			Object:      "capability:journey",
+			Expectation: false,
+		},
+		openfgaClient.ClientAssertion{
+			User:        "user:squanchy",
+			Relation:    "can_delete",
+			Object:      "capability:journey",
+			Expectation: true,
+		},
+		openfgaClient.ClientAssertion{
+			User:        "user:beth",
+			Relation:    "can_read",
+			Object:      "capability:claims",
+			Expectation: true,
+		},
+		openfgaClient.ClientAssertion{
+			User:        "user:beth",
+			Relation:    "can_create",
+			Object:      "capability:claims",
+			Expectation: false,
+		},
+		openfgaClient.ClientAssertion{
+			User:        "user:morty",
+			Relation:    "can_read",
+			Object:      "capability:claims",
+			Expectation: true,
+		},
+		openfgaClient.ClientAssertion{
+			User:        "user:morty",
+			Relation:    "can_update",
+			Object:      "capability:claims",
+			Expectation: true,
+		},
+		openfgaClient.ClientAssertion{
+			User:        "user:beth",
+			Relation:    "can_delete",
+			Object:      "capability:claims",
 			Expectation: false,
 		},
 	}
