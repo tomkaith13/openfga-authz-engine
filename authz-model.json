@@ -59,12 +59,12 @@
             ]
           }
         },
-        "can_write": {
+        "can_create": {
           "union": {
             "child": [
               {
                 "computedUserset": {
-                  "relation": "writer"
+                  "relation": "creator"
                 }
               },
               {
@@ -117,7 +117,7 @@
               },
               {
                 "computedUserset": {
-                  "relation": "can_write"
+                  "relation": "can_create"
                 }
               },
               {
@@ -136,7 +136,7 @@
         "reader": {
           "this": {}
         },
-        "writer": {
+        "creator": {
           "this": {}
         },
         "updater": {
@@ -154,7 +154,7 @@
           "can_read": {
             "directly_related_user_types": []
           },
-          "can_write": {
+          "can_create": {
             "directly_related_user_types": []
           },
           "can_update": {
@@ -177,7 +177,7 @@
               }
             ]
           },
-          "writer": {
+          "creator": {
             "directly_related_user_types": [
               {
                 "type": "user"
