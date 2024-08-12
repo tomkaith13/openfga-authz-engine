@@ -15,5 +15,5 @@ Use the [dashboard](http://localhost:3000/playground) to view the model, tuples 
 ![image](dashboard.png)
 
 ## TODO
-- Add the Impersonator tuple programmaticall
+- Add the Impersonator tuple (with CEL condition)programmatically
 - Expose a Postman collection to do so.
