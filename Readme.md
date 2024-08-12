@@ -4,3 +4,12 @@
 
 This PoC hosts a webapp along that connects to an OpenFGA server and adds Authz Models, along with tuple.
 It later exposes an endpoint that performs a `check` 
+
+## How to run the POC
+Use `Makefile` rules to get started
+1. Run `make run` to kickstart the POC
+2. Run `make stop` to bring the service down
+3. Run `make clean` to cleanup all containers and images
+
+Use the [dashboard](http://localhost:3000/playground) to view the model, tuples and assertions
+![image](dashboard.png)
