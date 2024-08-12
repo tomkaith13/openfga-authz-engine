@@ -3,8 +3,23 @@
   "type_definitions": [
     {
       "type": "user",
-      "relations": {},
-      "metadata": null
+      "relations": {
+        "impersonator": {
+          "this": {}
+        }
+      },
+      "metadata": {
+        "relations": {
+          "impersonator": {
+            "directly_related_user_types": [
+              {
+                "type": "user",
+                "condition": "check_expired"
+              }
+            ]
+          }
+        }
+      }
     },
     {
       "type": "group",
@@ -209,5 +224,22 @@
         }
       }
     }
-  ]
+  ],
+  "conditions": {
+    "check_expired": {
+      "name": "check_expired",
+      "expression": "current_time < grant_time + grant_duration",
+      "parameters": {
+        "current_time": {
+          "type_name": "TYPE_NAME_TIMESTAMP"
+        },
+        "grant_time": {
+          "type_name": "TYPE_NAME_TIMESTAMP"
+        },
+        "grant_duration": {
+          "type_name": "TYPE_NAME_DURATION"
+        }
+      }
+    }
+  }
 }

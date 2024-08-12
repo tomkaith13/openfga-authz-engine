@@ -2,6 +2,9 @@ model
   schema 1.1
 
 type user
+  relations
+    define impersonator: [user with check_expired]
+
 
 type group
   relations
@@ -19,6 +22,10 @@ type capability
     define updater: [user, group#member]
     define deleter: [user, group#member]
     define admin: [user, group#member]
+
+condition check_expired(current_time: timestamp, grant_time: timestamp, grant_duration: duration) {
+  current_time < grant_time + grant_duration
+}
 # tuples:
 #   - object: group:claims_reader
 #     user: user:bob
