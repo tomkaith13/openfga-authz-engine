@@ -11,6 +11,7 @@ import (
 	"github.com/go-chi/chi/middleware"
 	openfga "github.com/openfga/go-sdk"
 	openfgaClient "github.com/openfga/go-sdk/client"
+	"github.com/tomkaith13/openfga-authz-engine/handlers"
 	"github.com/tomkaith13/openfga-authz-engine/utils"
 )
 
@@ -75,6 +76,10 @@ func main() {
 		return
 	}
 
+	// Init for handlers
+	handlers.FgaClient = fgaClient
+	handlers.ModelId = data.AuthorizationModelId
+
 	fmt.Println("data model id:", data.AuthorizationModelId)
 
 	// Now loading the tuple data
@@ -98,15 +103,19 @@ func main() {
 		return
 	}
 
-	err = utils.CheckImpersonator(fgaClient, data.AuthorizationModelId, "beth", "homer")
-	if err != nil {
-		fmt.Println("Unable to check impersonator relation. err:", err)
-		return
-	}
-
 	r.Get("/hello", func(w http.ResponseWriter, r *http.Request) {
 
 		w.Write([]byte("World!!"))
+	})
+	r.Post("/add-beth-to-homer", func(w http.ResponseWriter, r *http.Request) {
+		utils.DeleteImpersonator(fgaClient, data.AuthorizationModelId, "beth", "homer")
+		// now we add the impersonator-impersonated relation with some defaults
+		err = utils.CreateImpersonator(fgaClient, data.AuthorizationModelId, "beth", "homer")
+		if err != nil {
+			fmt.Println("Unable to create impersonator relation. err:", err)
+			return
+		}
+		w.Write([]byte("beth set as impersonator for homer"))
 	})
 
 	r.Post("/check-homer", func(w http.ResponseWriter, r *http.Request) {
@@ -119,5 +128,6 @@ func main() {
 		w.WriteHeader(http.StatusOK)
 		w.Write([]byte("allowed"))
 	})
+	r.Post("/check", handlers.CheckCustomRelation)
 	http.ListenAndServe(":8888", r)
 }

@@ -44,3 +44,31 @@ func CreateImpersonator(fgaClient *openfgaClient.OpenFgaClient, modelId string, 
 	fmt.Printf("data from adding impersonator: %+v\n", data.Writes)
 	return nil
 }
+
+func DeleteImpersonator(fgaClient *openfgaClient.OpenFgaClient, modelId string, impersonatorId string, userId string) error {
+	options := openfgaClient.ClientWriteOptions{
+		AuthorizationModelId: &modelId,
+	}
+
+	body := openfgaClient.ClientWriteRequest{
+		Deletes: []openfgaClient.ClientTupleKeyWithoutCondition{
+			{
+				User:     "user:" + userId,
+				Relation: "impersonator",
+				Object:   "user:" + impersonatorId,
+			},
+		},
+	}
+
+	data, err := fgaClient.Write(context.Background()).
+		Body(body).
+		Options(options).
+		Execute()
+
+	if err != nil {
+		return err
+	}
+
+	fmt.Printf("data from deleting impersonator: %+v\n", data.Deletes)
+	return nil
+}
