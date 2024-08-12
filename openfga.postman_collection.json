@@ -41,6 +41,106 @@
 				}
 			},
 			"response": []
+		},
+		{
+			"name": "check",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"user_id\": \"homer\",\n    \"impersonator_id\": \"beth\",\n    \"relation\": \"can_read\",\n    \"capability_id\": \"claims\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8888/check",
+					"host": [
+						"localhost"
+					],
+					"port": "8888",
+					"path": [
+						"check"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "beth-homer-claims-can_read",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"user_id\": \"homer\",\n    \"impersonator_id\": \"beth\",\n    \"relation\": \"can_read\",\n    \"capability_id\": \"claims\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8888/check",
+							"host": [
+								"localhost"
+							],
+							"port": "8888",
+							"path": [
+								"check"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "plain",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Mon, 12 Aug 2024 20:47:39 GMT"
+						},
+						{
+							"key": "Content-Length",
+							"value": "16"
+						},
+						{
+							"key": "Content-Type",
+							"value": "text/plain; charset=utf-8"
+						}
+					],
+					"cookie": [],
+					"body": "All looks good!!"
+				}
+			]
+		},
+		{
+			"name": "add-beth-to-homer",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8888/add-beth-to-homer",
+					"host": [
+						"localhost"
+					],
+					"port": "8888",
+					"path": [
+						"add-beth-to-homer"
+					]
+				}
+			},
+			"response": []
 		}
 	]
 }
