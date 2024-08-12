@@ -77,6 +77,13 @@ func main() {
 
 	fmt.Println("data model id:", data.AuthorizationModelId)
 
+	// Now loading the data
+	err = utils.TupleLoader(fgaClient, data.AuthorizationModelId)
+	if err != nil {
+		fmt.Println("Unable to load tuples. err:", err)
+		return
+	}
+
 	r.Get("/hello", func(w http.ResponseWriter, r *http.Request) {
 
 		w.Write([]byte("World!!"))

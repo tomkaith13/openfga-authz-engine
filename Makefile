@@ -3,7 +3,7 @@ clean:
 run:
 	docker-compose up --build -d
 restart:
-	make stop && make clean && make run
+	make clean && make run
 stop:
 	docker-compose down
 
