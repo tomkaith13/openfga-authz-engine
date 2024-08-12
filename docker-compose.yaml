@@ -65,4 +65,6 @@ services:
       - openfga
     environment:
       - FGA_API_URL=http://openfga:8080
+      - FGA_STORE_NAME=openfga-auth-engine-store
+      - FGA_CONFIG_FILE=authz-model.json
    
