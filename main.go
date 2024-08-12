@@ -91,9 +91,33 @@ func main() {
 		return
 	}
 
+	// now we add the impersonator-impersonated relation
+	err = utils.CreateImpersonator(fgaClient, data.AuthorizationModelId, "beth", "homer")
+	if err != nil {
+		fmt.Println("Unable to create impersonator relation. err:", err)
+		return
+	}
+
+	err = utils.CheckImpersonator(fgaClient, data.AuthorizationModelId, "beth", "homer")
+	if err != nil {
+		fmt.Println("Unable to check impersonator relation. err:", err)
+		return
+	}
+
 	r.Get("/hello", func(w http.ResponseWriter, r *http.Request) {
 
 		w.Write([]byte("World!!"))
+	})
+
+	r.Post("/check-homer", func(w http.ResponseWriter, r *http.Request) {
+		err := utils.CheckImpersonator(fgaClient, data.AuthorizationModelId, "beth", "homer")
+		if err != nil {
+			http.Error(w, "Beth has no access to Homer", http.StatusForbidden)
+			w.Write([]byte(err.Error()))
+			return
+		}
+		w.WriteHeader(http.StatusOK)
+		w.Write([]byte("allowed"))
 	})
 	http.ListenAndServe(":8888", r)
 }
