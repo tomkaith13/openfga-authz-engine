@@ -77,10 +77,17 @@ func main() {
 
 	fmt.Println("data model id:", data.AuthorizationModelId)
 
-	// Now loading the data
+	// Now loading the tuple data
 	err = utils.TupleLoader(fgaClient, data.AuthorizationModelId)
 	if err != nil {
 		fmt.Println("Unable to load tuples. err:", err)
+		return
+	}
+
+	// Now loading the assertions
+	err = utils.LoadAssertions(fgaClient, data.AuthorizationModelId)
+	if err != nil {
+		fmt.Println("Unable to load assertions. err:", err)
 		return
 	}
 

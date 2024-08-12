@@ -102,3 +102,32 @@ func TupleLoader(fgaClient *openfgaClient.OpenFgaClient, modelId string) error {
 
 	return nil
 }
+
+func LoadAssertions(fgaClient *openfgaClient.OpenFgaClient, modelId string) error {
+	options := openfgaClient.ClientWriteAssertionsOptions{
+		AuthorizationModelId: &modelId,
+	}
+	requestBody := openfgaClient.ClientWriteAssertionsRequest{
+		openfgaClient.ClientAssertion{
+			User:        "user:birdman",
+			Relation:    "can_delete",
+			Object:      "capability:claims",
+			Expectation: true,
+		},
+		openfgaClient.ClientAssertion{
+			User:        "user:birdman",
+			Relation:    "can_delete",
+			Object:      "capability:journey",
+			Expectation: false,
+		},
+	}
+	_, err := fgaClient.WriteAssertions(context.Background()).
+		Body(requestBody).
+		Options(options).
+		Execute()
+
+	if err != nil {
+		return err
+	}
+	return nil
+}
