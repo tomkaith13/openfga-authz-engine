@@ -13,3 +13,7 @@ Use `Makefile` rules to get started
 
 Use the [dashboard](http://localhost:3000/playground) to view the model, tuples and assertions
 ![image](dashboard.png)
+
+## TODO
+- Add the Impersonator tuple programmaticall
+- Expose a Postman collection to do so.
