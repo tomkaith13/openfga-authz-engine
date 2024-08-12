@@ -55,6 +55,18 @@ services:
       - "8081:8081"
       # Needed for the playground (Do not enable in prod!)
       - "3000:3000"
+      #prometheus metrics
+      - "2112:2112"
+    # healthcheck:
+    #   test:
+    #     [
+    #       "CMD",
+    #       "/usr/local/bin/grpc_health_probe",
+    #       "-addr=openfga:8081"
+    #     ]
+    #   interval: 5s
+    #   timeout: 30s
+    #   retries: 3
   app:
     build: .       # Build the Go app from a Dockerfile in the current directory
     ports:
