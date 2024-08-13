@@ -48,7 +48,7 @@ func CheckCustomRelation(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, err.Error(), http.StatusForbidden)
 		return
 	}
-	w.Write([]byte("All looks good!!"))
+	w.Write([]byte("Allowed: true"))
 	w.WriteHeader(http.StatusOK)
 
 }
