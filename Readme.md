@@ -35,7 +35,7 @@ The webserver setups the model
 
 ### Adding Tuples and Assertions to the Store
 This also can be done using CLI and APIs. In this PoC, we chose to use the latter. It also adds Assertions to verify the relationships via the [dashboard](http://localhost:3000/playground).
-One can view even the Decision Tree using this dashboard for every assertion execution ![image](decision-tree.png)
+One can view even the Decision Tree using this dashboard for every assertion execution ![image](decision-tree.png). The loading of the tuples can be found in `tuple-loader.go`
 
 ### cURL
 Finally, we can use `check` to verify that
@@ -43,7 +43,7 @@ Finally, we can use `check` to verify that
 - And, if the impersonator has certain CRUD perms when dealing with a capability.
 
 `/check` endpoint can be used like this:
-```
+```bash
 curl --location 'localhost:8888/check' --header 'Content-Type: application/json' --data '{
     "user_id": "homer",
     "impersonator_id": "beth",
@@ -54,6 +54,13 @@ curl --location 'localhost:8888/check' --header 'Content-Type: application/json'
 
 When set, the impersonation relation is valid only for `1m`.
 We enforce this using CEL-based [Condition](https://openfga.dev/docs/modeling/conditions) that is found in the Authz Model Config.
+The condition used to check expiry in this POC is:
+```yaml
+condition check_expired(current_time: timestamp, grant_time: timestamp, grant_duration: duration) {
+  current_time < grant_time + grant_duration
+}
+```
+We finally pass the `current_time` in OpenFGA's `check` API using `Context` map.
 
 
 
