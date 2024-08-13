@@ -136,5 +136,6 @@ func main() {
 		w.Write([]byte("allowed"))
 	})
 	r.Post("/check", handlers.CheckCustomRelation)
+	r.Post("/add-impersonation", handlers.AddImpersonationRelationHandler)
 	http.ListenAndServe(":8888", r)
 }
