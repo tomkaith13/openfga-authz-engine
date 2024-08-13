@@ -20,7 +20,7 @@ OpenFGA Authz Model can be programmed using their custom DSL.
 The details can be found [here](https://openfga.dev/docs/configuration-language)
 In this repo, you can take a look at `authz-model.fga` to see how we modeled an Impersonation Scenario.
 Unfortunately, this DSL would need to be transformed to JSON for the OpenFGA APIs to interact with.
-This would can be done using their CLI's [tranform](https://github.com/openfga/cli?tab=readme-ov-file#transform-an-authorization-model) option
+This would can be done using their CLI's [transform](https://github.com/openfga/cli?tab=readme-ov-file#transform-an-authorization-model) option
 or using a [VSCode plugin](https://marketplace.visualstudio.com/items?itemName=openfga.openfga-vscode). The plugin does provide auto-completion as well.
 The json of `authz-mode.fga` can be found as `authz-model.json` in this same repo.
 
