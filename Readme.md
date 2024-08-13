@@ -62,6 +62,18 @@ condition check_expired(current_time: timestamp, grant_time: timestamp, grant_du
 ```
 We finally pass the `current_time` in OpenFGA's `check` API using `Context` map.
 
+### Prometheus Metrics
+Prometheus Metrics for the OpenFGA container can be scraped using this [link](http://localhost:2112/metrics)
+
+### Logs
+Logs can be viewed by looking at the Openfga container using this command from host:
+
+```bash
+docker-compose logs -f openfga 
+```
+
+![image](./logs.png)
+
 
 
 ## TODO
