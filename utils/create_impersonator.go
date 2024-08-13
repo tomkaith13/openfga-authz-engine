@@ -72,3 +72,35 @@ func DeleteImpersonator(fgaClient *openfgaClient.OpenFgaClient, modelId string, 
 	fmt.Printf("data from deleting impersonator: %+v\n", data.Deletes)
 	return nil
 }
+
+func GetImpersonator(fgaClient *openfgaClient.OpenFgaClient, storeId string, impersonatorId string, userId string) error {
+	options := openfgaClient.ClientReadOptions{
+		StoreId: &storeId,
+	}
+
+	userKey := "user:" + userId
+	relation := "impersonator"
+	objectKey := "user:" + impersonatorId
+	body := openfgaClient.ClientReadRequest{
+		User:     &userKey,
+		Relation: &relation,
+		Object:   &objectKey,
+	}
+	resp, err := fgaClient.Read(context.Background()).Options(options).Body(body).Execute()
+	if err != nil {
+		return err
+	}
+
+	tuples := resp.GetTuples()
+	for _, t := range tuples {
+		key := t.Key
+		fmt.Println("user:", key.User, " relation:", key.Relation, " object:", key.Object)
+		condition := key.Condition
+		if condition != nil {
+			context := condition.GetContext()
+			fmt.Println("context:", context)
+		}
+	}
+	return nil
+
+}

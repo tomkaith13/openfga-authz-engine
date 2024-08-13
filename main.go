@@ -45,6 +45,7 @@ func main() {
 	}
 
 	fmt.Println("store details:", resp.Name, resp.Id)
+	storeId := resp.Id
 
 	// We need to reinit the client to use the new StoreId we got from CreateStore
 	fgaClient, err = openfgaClient.NewSdkClient(&openfgaClient.ClientConfiguration{
@@ -101,6 +102,12 @@ func main() {
 	if err != nil {
 		fmt.Println("Unable to create impersonator relation. err:", err)
 		return
+	}
+
+	// test read tuples
+	err = utils.GetImpersonator(fgaClient, storeId, "beth", "homer")
+	if err != nil {
+		fmt.Println("error getting impersoantor tuple:", err)
 	}
 
 	r.Get("/hello", func(w http.ResponseWriter, r *http.Request) {
