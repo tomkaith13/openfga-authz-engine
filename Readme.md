@@ -17,5 +17,5 @@ Use the [dashboard](http://localhost:3000/playground) to view the model, tuples 
 ## TODO
 - ~~Add the Impersonator tuple (with CEL condition)programmatically~~ Done
 - ~~Expose a Postman collection to do so.~~ Done
-- Create a POST to accept tuples to create
-- Create a POST /check that accepts json to check if an impersonation is valid and has the correct permissions to perform a CRUD.
+- ~~Create a POST to accept impersonation tuples to create~~ Done
+- ~~Create a POST /check that accepts json to check if an impersonation is valid and has the correct permissions to perform a CRUD.~~ Done
