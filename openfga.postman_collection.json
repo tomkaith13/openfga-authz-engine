@@ -116,6 +116,79 @@
 			]
 		},
 		{
+			"name": "add-impersonation",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"user_id\": \"homer\",\n    \"impersonator_id\": \"beth\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8888/add-impersonation",
+					"host": [
+						"localhost"
+					],
+					"port": "8888",
+					"path": [
+						"add-impersonation"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "sample",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"user_id\": \"homer\",\n    \"impersonator_id\": \"beth\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8888/add-impersonation",
+							"host": [
+								"localhost"
+							],
+							"port": "8888",
+							"path": [
+								"add-impersonation"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "plain",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Tue, 13 Aug 2024 15:29:29 GMT"
+						},
+						{
+							"key": "Content-Length",
+							"value": "25"
+						},
+						{
+							"key": "Content-Type",
+							"value": "text/plain; charset=utf-8"
+						}
+					],
+					"cookie": [],
+					"body": "added impersonation tuple"
+				}
+			]
+		},
+		{
 			"name": "add-beth-to-homer",
 			"request": {
 				"method": "POST",
