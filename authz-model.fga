@@ -4,6 +4,7 @@ model
 type user
   relations
     define impersonator: [user with check_expired]
+    define impersonator_with_ext: [user with check_expired]
 
 
 type group
@@ -25,4 +26,7 @@ type capability
 
 condition check_expired(current_time: timestamp, grant_time: timestamp, grant_duration: duration) {
   current_time < grant_time + grant_duration
+}
+condition check_expired_with_ext(current_time: timestamp, grant_time: timestamp, grant_duration: duration, external_check: bool) {
+  current_time < grant_time + grant_duration && external_check
 }

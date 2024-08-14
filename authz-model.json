@@ -6,11 +6,22 @@
       "relations": {
         "impersonator": {
           "this": {}
+        },
+        "impersonator_with_ext": {
+          "this": {}
         }
       },
       "metadata": {
         "relations": {
           "impersonator": {
+            "directly_related_user_types": [
+              {
+                "type": "user",
+                "condition": "check_expired"
+              }
+            ]
+          },
+          "impersonator_with_ext": {
             "directly_related_user_types": [
               {
                 "type": "user",
@@ -238,6 +249,24 @@
         },
         "grant_duration": {
           "type_name": "TYPE_NAME_DURATION"
+        }
+      }
+    },
+    "check_expired_with_ext": {
+      "name": "check_expired_with_ext",
+      "expression": "current_time < grant_time + grant_duration && external_check",
+      "parameters": {
+        "current_time": {
+          "type_name": "TYPE_NAME_TIMESTAMP"
+        },
+        "grant_time": {
+          "type_name": "TYPE_NAME_TIMESTAMP"
+        },
+        "grant_duration": {
+          "type_name": "TYPE_NAME_DURATION"
+        },
+        "external_check": {
+          "type_name": "TYPE_NAME_BOOL"
         }
       }
     }
