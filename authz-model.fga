@@ -9,7 +9,7 @@ type user
 
 type group
   relations
-    define member: [user]
+    define member: [user, group#member]
 
 type capability
   relations

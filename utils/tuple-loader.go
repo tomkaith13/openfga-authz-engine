@@ -98,6 +98,16 @@ func TupleLoader(fgaClient *openfgaClient.OpenFgaClient, modelId string) error {
 				Relation: "admin",
 				Object:   "capability:journey",
 			},
+			{ // alice is in agent group
+				User:     "user:alice",
+				Relation: "member",
+				Object:   "group:agent",
+			},
+			{
+				User:     "group:agent#member",
+				Relation: "member",
+				Object:   "group:claims_reader",
+			},
 		},
 	}
 	data, err := fgaClient.Write(context.Background()).
@@ -168,6 +178,18 @@ func LoadAssertions(fgaClient *openfgaClient.OpenFgaClient, modelId string) erro
 		},
 		openfgaClient.ClientAssertion{
 			User:        "user:beth",
+			Relation:    "can_delete",
+			Object:      "capability:claims",
+			Expectation: false,
+		},
+		openfgaClient.ClientAssertion{
+			User:        "user:alice",
+			Relation:    "can_read",
+			Object:      "capability:claims",
+			Expectation: true,
+		},
+		openfgaClient.ClientAssertion{
+			User:        "user:alice",
 			Relation:    "can_delete",
 			Object:      "capability:claims",
 			Expectation: false,
