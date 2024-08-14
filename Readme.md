@@ -81,4 +81,5 @@ docker-compose logs -f openfga
 - ~~Expose a Postman collection to do so.~~ Done
 - ~~Create a POST to accept impersonation tuples to create~~ Done
 - ~~Create a POST /check that accepts json to check if an impersonation is valid and has the correct permissions to perform a CRUD.~~ Done
+- ~~See if we can simulate calling into external services similar to http_send in OPA~~ Done
 - Make the impersonator relation expiry configurable via Docker-compose.

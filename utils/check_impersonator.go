@@ -56,7 +56,7 @@ func CheckImpersonatorWithExternalResolver(fgaClient *openfgaClient.OpenFgaClien
 		User:     "user:" + userId,
 		Relation: "impersonator",
 		Object:   "user:" + impersonatorId,
-		Context:  &map[string]interface{}{"current_time": formattedTime, "external_check": externalResolver()},
+		Context:  &map[string]interface{}{"current_time": formattedTime, "external_check": externalResolver()}, // we are passing the results from externalResolver
 	}
 
 	data, err := fgaClient.Check(context.Background()).
