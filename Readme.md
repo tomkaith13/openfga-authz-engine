@@ -74,6 +74,52 @@ docker-compose logs -f openfga
 
 ![image](./logs.png)
 
+### Postgres
+All the data (model, tuples, assertions) are stored in Postgres. 
+The can be accessed after ssh'ing into the postgres container via :
+```bash
+root@a7c6f8c180b2:/# psql -U postgres
+psql (14.13 (Debian 14.13-1.pgdg120+1))
+Type "help" for help.
+
+postgres=# \l
+                                 List of databases
+   Name    |  Owner   | Encoding |  Collate   |   Ctype    |   Access privileges   
+-----------+----------+----------+------------+------------+-----------------------
+ postgres  | postgres | UTF8     | en_US.utf8 | en_US.utf8 | 
+ template0 | postgres | UTF8     | en_US.utf8 | en_US.utf8 | =c/postgres          +
+           |          |          |            |            | postgres=CTc/postgres
+ template1 | postgres | UTF8     | en_US.utf8 | en_US.utf8 | =c/postgres          +
+           |          |          |            |            | postgres=CTc/postgres
+(3 rows)
+
+postgres=# \c postgres
+You are now connected to database "postgres" as user "postgres".
+postgres=# \dt
+                List of relations
+ Schema |        Name         | Type  |  Owner   
+--------+---------------------+-------+----------
+ public | assertion           | table | postgres
+ public | authorization_model | table | postgres
+ public | changelog           | table | postgres
+ public | goose_db_version    | table | postgres
+ public | store               | table | postgres
+ public | tuple               | table | postgres
+(6 rows)
+
+postgres=# select * from tuple limit 5;
+
+           store            | object_type |   object_id    | relation |            _user            | user_type |            ulid            |         inserted_at          | condition_name | condition_context 
+----------------------------+-------------+----------------+----------+-----------------------------+-----------+----------------------------+------------------------------+----------------+-------------------
+ 01J58MKZR32NMREB1WKQ7BVRNN | group       | claims_reader  | member   | user:beth                   | user      | 01J58MKZRFVVN815ZN1GYWS4AS | 2024-08-14 14:28:09.61584+00 |                | 
+ 01J58MKZR32NMREB1WKQ7BVRNN | capability  | claims         | reader   | group:claims_reader#member  | userset   | 01J58MKZRFVVN815ZN1HWBTQQ2 | 2024-08-14 14:28:09.61584+00 |                | 
+ 01J58MKZR32NMREB1WKQ7BVRNN | group       | wallet_deleter | member   | user:jerry                  | user      | 01J58MKZRFVVN815ZN1K7CTXDQ | 2024-08-14 14:28:09.61584+00 |                | 
+ 01J58MKZR32NMREB1WKQ7BVRNN | capability  | wallet         | deleter  | group:wallet_deleter#member | userset   | 01J58MKZRFVVN815ZN1Q50VF2G | 2024-08-14 14:28:09.61584+00 |                | 
+ 01J58MKZR32NMREB1WKQ7BVRNN | group       | wallet_reader  | member   | user:jerry                  | user      | 01J58MKZRFVVN815ZN1S0KFXC5 | 2024-08-14 14:28:09.61584+00 |                | 
+(5 rows)
+postgres=# 
+```
+
 
 
 ## TODO
