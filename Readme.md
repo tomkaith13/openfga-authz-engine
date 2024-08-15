@@ -3,7 +3,9 @@
 > [OpenFGA](https://openfga.dev/) is an open-source authorization solution that allows developers to build granular access control using an easy-to-read modeling language and friendly APIs.
 
 This PoC hosts a webapp along that connects to an OpenFGA server and adds Authz Models, along with tuple.
-It later exposes an endpoint that performs a `check`. The services in this setup can be deployed using `docker-compose`
+It later exposes an endpoint that performs a `check`. The services in this setup can be deployed using `docker-compose`. 
+This supports creating CRUD permissions per capability and also creating custom roles (or 2nd tier groups) to check if a user has
+permissions to work on a capability. 
 
 ## How to run the POC
 Use `Makefile` rules to get started
