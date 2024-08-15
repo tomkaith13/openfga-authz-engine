@@ -112,6 +112,51 @@
 					],
 					"cookie": [],
 					"body": "All looks good!!"
+				},
+				{
+					"name": "agent-alice-home-claims-can_read",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"user_id\": \"homer\",\n    \"impersonator_id\": \"alice\",\n    \"relation\": \"can_read\",\n    \"capability_id\": \"claims\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8888/check",
+							"host": [
+								"localhost"
+							],
+							"port": "8888",
+							"path": [
+								"check"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "plain",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Thu, 15 Aug 2024 14:56:07 GMT"
+						},
+						{
+							"key": "Content-Length",
+							"value": "13"
+						},
+						{
+							"key": "Content-Type",
+							"value": "text/plain; charset=utf-8"
+						}
+					],
+					"cookie": [],
+					"body": "Allowed: true"
 				}
 			]
 		},
@@ -142,7 +187,7 @@
 			},
 			"response": [
 				{
-					"name": "sample",
+					"name": "beth",
 					"originalRequest": {
 						"method": "POST",
 						"header": [],
@@ -173,6 +218,51 @@
 						{
 							"key": "Date",
 							"value": "Tue, 13 Aug 2024 15:29:29 GMT"
+						},
+						{
+							"key": "Content-Length",
+							"value": "25"
+						},
+						{
+							"key": "Content-Type",
+							"value": "text/plain; charset=utf-8"
+						}
+					],
+					"cookie": [],
+					"body": "added impersonation tuple"
+				},
+				{
+					"name": "alice",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"user_id\": \"homer\",\n    \"impersonator_id\": \"alice\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8888/add-impersonation",
+							"host": [
+								"localhost"
+							],
+							"port": "8888",
+							"path": [
+								"add-impersonation"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "plain",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Thu, 15 Aug 2024 14:56:03 GMT"
 						},
 						{
 							"key": "Content-Length",
