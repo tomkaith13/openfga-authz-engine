@@ -6,6 +6,8 @@ This PoC hosts a webapp along that connects to an OpenFGA server and adds Authz 
 It later exposes an endpoint that performs a `check`. The services in this setup can be deployed using `docker-compose`. 
 This supports creating CRUD permissions per capability and also creating custom roles (or 2nd tier groups) to check if a user has
 permissions to work on a capability. 
+The PoC enables openFGA caching. However, that does not work with Conditional Tuples which contain real-time data like time.
+For those, we would have to write code in the application layer using LRU. See `CheckImpersonatorWithExternalResolver` for usage of the LRU.
 
 ## How to run the POC
 Use `Makefile` rules to get started
