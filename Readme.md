@@ -130,4 +130,5 @@ postgres=#
 - ~~Create a POST to accept impersonation tuples to create~~ Done
 - ~~Create a POST /check that accepts json to check if an impersonation is valid and has the correct permissions to perform a CRUD.~~ Done
 - ~~See if we can simulate calling into external services similar to http_send in OPA~~ Done
+- ~~Enabled Cache on openFGA. it works on all checks but it wont work for ones with conditional tuples. For external resolvers, we use an LRU to save~~
 - Make the impersonator relation expiry configurable via Docker-compose.
