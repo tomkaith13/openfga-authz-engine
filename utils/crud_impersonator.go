@@ -176,3 +176,35 @@ func CreateUserManagementTuples(fgaClient *openfgaClient.OpenFgaClient, modelId 
 	return nil
 
 }
+
+// func DeleteUserManagementTuple(fgaClient *openfgaClient.OpenFgaClient, modelId string, impersonatorId string, userIds []string) error {
+// 	options := openfgaClient.ClientWriteOptions{
+// 		AuthorizationModelId: &modelId,
+// 	}
+// 	writeTuples := []openfgaClient.ClientTupleKey{}
+// 	for _, userId := range userIds {
+
+// 		writeTuples = append(writeTuples, openfga.TupleKey{
+// 			User:     "user:" + impersonatorId,
+// 			Relation: "manages",
+// 			Object:   "user:" + userId,
+// 		})
+// 	}
+// 	body := openfgaClient.ClientWriteRequest{
+// 		Writes: writeTuples,
+// 	}
+// 	data, err := fgaClient.Write(context.Background()).
+// 		Body(body).
+// 		Options(options).
+// 		Execute()
+
+// 	if err != nil {
+// 		if strings.Contains(err.Error(), "tuple which already exists") {
+// 			return ErrorAlreadyExists
+// 		}
+// 	}
+
+// 	fmt.Printf("data from adding impersonator: %+v\n", data.Writes)
+// 	return nil
+
+// }

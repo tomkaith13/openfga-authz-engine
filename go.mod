@@ -7,4 +7,7 @@ require (
 	github.com/openfga/go-sdk v0.5.0
 )
 
-require golang.org/x/sync v0.7.0 // indirect
+require (
+	github.com/hashicorp/golang-lru/v2 v2.0.7
+	golang.org/x/sync v0.7.0 // indirect
+)

@@ -45,6 +45,10 @@ services:
       - OPENFGA_DATASTORE_ENGINE=postgres
       - OPENFGA_DATASTORE_URI=postgres://postgres:password@postgres:5432/postgres?sslmode=disable
       - OPENFGA_LOG_FORMAT=json
+      # - OPENFGA_EXPERIMENTALS="enable-consistency-params, check-query-cache"
+      - OPENFGA_CHECK_QUERY_CACHE_ENABLED=true
+      - OPENFGA_CHECK_QUERY_CACHE_TTL=60s
+    # command: run  --check-query-cache-enabled --check-query-cache-ttl 60s
     command: run
     networks:
       - openfga
