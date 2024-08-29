@@ -137,5 +137,7 @@ func main() {
 	})
 	r.Post("/check", handlers.CheckCustomRelation)
 	r.Post("/add-impersonation", handlers.AddImpersonationRelationHandler)
+	r.Post("/add-manages-tuples", handlers.AddManagesRelationHandler)
+	r.Post("/check-manages", handlers.CheckManages)
 	http.ListenAndServe(":8888", r)
 }

@@ -5,6 +5,7 @@ type user
   relations
     define impersonator: [user with check_expired]
     define impersonator_with_ext: [user with check_expired_with_ext]
+    define manages: [user]
 
 
 type group

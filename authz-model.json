@@ -9,6 +9,9 @@
         },
         "impersonator_with_ext": {
           "this": {}
+        },
+        "manages": {
+          "this": {}
         }
       },
       "metadata": {
@@ -25,7 +28,14 @@
             "directly_related_user_types": [
               {
                 "type": "user",
-                "condition": "check_expired"
+                "condition": "check_expired_with_ext"
+              }
+            ]
+          },
+          "manages": {
+            "directly_related_user_types": [
+              {
+                "type": "user"
               }
             ]
           }
