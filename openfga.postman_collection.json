@@ -304,6 +304,60 @@
 				}
 			},
 			"response": []
+		},
+		{
+			"name": "add-manages-tuples",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"impersonator_id\": \"beth\",\n    \"user_ids\": [\"homer\", \"marge\", \"lisa\", \"bart\"]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8888/add-manages-tuples",
+					"host": [
+						"localhost"
+					],
+					"port": "8888",
+					"path": [
+						"add-manages-tuples"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "check-manages",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"impersonator_id\": \"beth\",\n    \"user_id\": \"bart\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8888/check-manages",
+					"host": [
+						"localhost"
+					],
+					"port": "8888",
+					"path": [
+						"check-manages"
+					]
+				}
+			},
+			"response": []
 		}
 	]
 }
