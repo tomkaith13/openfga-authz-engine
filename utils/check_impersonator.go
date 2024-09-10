@@ -7,6 +7,7 @@ import (
 	"time"
 
 	"github.com/hashicorp/golang-lru/v2/expirable"
+	openfga "github.com/openfga/go-sdk"
 	openfgaClient "github.com/openfga/go-sdk/client"
 )
 
@@ -19,6 +20,8 @@ const (
 func CheckImpersonator(fgaClient *openfgaClient.OpenFgaClient, modelId string, impersonatorId string, userId string) error {
 	options := openfgaClient.ClientCheckOptions{
 		AuthorizationModelId: &modelId,
+		// This consistency level is the default if you look at the source code
+		Consistency: openfga.CONSISTENCYPREFERENCE_MINIMIZE_LATENCY.Ptr(),
 	}
 
 	currentTime := time.Now().UTC()
@@ -53,6 +56,7 @@ func CheckImpersonator(fgaClient *openfgaClient.OpenFgaClient, modelId string, i
 func CheckImpersonatorWithExternalResolver(fgaClient *openfgaClient.OpenFgaClient, modelId string, impersonatorId string, userId string) error {
 	options := openfgaClient.ClientCheckOptions{
 		AuthorizationModelId: &modelId,
+		Consistency:          openfga.CONSISTENCYPREFERENCE_HIGHER_CONSISTENCY.Ptr(),
 	}
 
 	currentTime := time.Now().UTC()
