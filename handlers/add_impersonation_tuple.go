@@ -26,6 +26,10 @@ func AddImpersonationRelationHandler(w http.ResponseWriter, r *http.Request) {
 		// This means the tuple does not exist or is no longer valid
 		// so we delete and re-create it
 		utils.DeleteImpersonator(FgaClient, ModelId, addImpersonationReq.ImpersonatorId, addImpersonationReq.UserId)
+
+		//
+		// ---------> the place where glitchiness can occur.. they dont support duplicate tuple manipulation in a single request.
+		//
 		err = utils.CreateImpersonator(FgaClient, ModelId, addImpersonationReq.ImpersonatorId, addImpersonationReq.UserId)
 		if err != nil {
 			http.Error(w, "Unable to add Impersonator tuple. err:"+err.Error(), http.StatusInternalServerError)

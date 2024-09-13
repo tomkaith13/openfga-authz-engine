@@ -137,6 +137,11 @@ func main() {
 	})
 	r.Post("/check", handlers.CheckCustomRelation)
 	r.Post("/add-impersonation", handlers.AddImpersonationRelationHandler)
+
+	// This is a dummy endpoint added to prove the point that edit on the same tuple in a single transcation does not work!
+	// If you want to refresh, just use add-impersonation
+	r.Post("/refresh-impersonation", handlers.RefreshImpersonationHandler)
+
 	r.Post("/add-manages-tuples", handlers.AddManagesRelationHandler)
 	r.Post("/check-manages", handlers.CheckManages)
 	r.Post("/check-with-ext", handlers.CheckCustomRelationWithExt)

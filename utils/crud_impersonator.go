@@ -113,6 +113,51 @@ func DeleteImpersonator(fgaClient *openfgaClient.OpenFgaClient, modelId string, 
 	return nil
 }
 
+// DeleteAndAddImpersonator results in an ERROR if the tuple already exists. It does not work!!
+// Just added it here as a proof! Do not use!
+func DeleteAndAddImpersonator(fgaClient *openfgaClient.OpenFgaClient, modelId string, impersonatorId string, userId string) error {
+	options := openfgaClient.ClientWriteOptions{
+		AuthorizationModelId: &modelId,
+	}
+
+	currentTime := time.Now().UTC()
+	formattedTime := currentTime.Format("2006-01-02T15:04:05Z")
+	fmt.Println("formated UTC time:", formattedTime)
+
+	body := openfgaClient.ClientWriteRequest{
+		Deletes: []openfgaClient.ClientTupleKeyWithoutCondition{
+			{
+				User:     "user:" + userId,
+				Relation: "impersonator",
+				Object:   "user:" + impersonatorId,
+			},
+		},
+		Writes: []openfgaClient.ClientTupleKey{
+			{
+				User:     "user:" + userId,
+				Relation: "impersonator",
+				Object:   "user:" + impersonatorId,
+				Condition: &openfga.RelationshipCondition{
+					Name:    "check_expired",
+					Context: &map[string]interface{}{"grant_time": formattedTime, "grant_duration": "1m"},
+				},
+			},
+		},
+	}
+
+	data, err := fgaClient.Write(context.Background()).
+		Body(body).
+		Options(options).
+		Execute()
+
+	if err != nil {
+		return err
+	}
+
+	fmt.Printf("data from deleting impersonator: %+v\n", data.Deletes)
+	return nil
+}
+
 func GetImpersonator(fgaClient *openfgaClient.OpenFgaClient, storeId string, impersonatorId string, userId string) error {
 	options := openfgaClient.ClientReadOptions{
 		StoreId: &storeId,
