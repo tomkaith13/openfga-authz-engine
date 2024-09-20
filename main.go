@@ -112,6 +112,7 @@ func main() {
 
 	r.Get("/hello", func(w http.ResponseWriter, r *http.Request) {
 
+		utils.ListUserGroup(fgaClient, data.AuthorizationModelId, "jerry")
 		w.Write([]byte("World!!"))
 	})
 	r.Post("/add-beth-to-homer", func(w http.ResponseWriter, r *http.Request) {
